@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-export const useStoreMap = () => {
+export const useMapStore = () => {
   const state = useSelector((state) => state.map);
   return {
     ...state,
