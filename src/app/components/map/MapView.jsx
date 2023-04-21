@@ -1,4 +1,4 @@
-import { useMap } from '../hooks/useMap';
+import { useMap } from '../../hooks/useMap';
 
 export const MapView = () => {
   const { refElement } = useMap();
