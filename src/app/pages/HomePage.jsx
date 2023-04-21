@@ -1,7 +1,8 @@
 import { MapView } from '../components/map/MapView';
-import { ErrorAccessLocation } from '../components/ErrorAccessLocation';
+import { ErrorAccessLocation } from '../ui/ErrorAccessLocation';
 import { usePlacesStore } from '../hooks/usePlacesStore';
 import { useActionsPlaces } from '../hooks/useActionsPlaces';
+import { ButtonLocationUser } from '../components/map/ButtonLocationUser';
 
 const Homepage = () => {
   const { deniedLocation } = usePlacesStore();
@@ -11,6 +12,7 @@ const Homepage = () => {
     <>
       <MapView />
       {deniedLocation && <ErrorAccessLocation />}
+      <ButtonLocationUser />
     </>
   );
 };
