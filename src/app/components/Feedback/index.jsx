@@ -2,7 +2,7 @@ import { FeedbackUser } from './User';
 import { FeedbackThanks } from './Thanks';
 import { FeedBackOverall } from './Overall';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { FeedbackLogic } from '../FeedbackLogic';
+import { FeedbackLogic } from './FeedbackLogic';
 
 const Feedback = () => {
   const { closeView, active, toggleActive, changeView, view } = FeedbackLogic();
@@ -16,12 +16,19 @@ const Feedback = () => {
         Feedback
       </button>
       {active && (
-        <div className='fixed top-0 right-0 bg-slate-100 min-h-screen max-w-sm p-10 z-[2]'>
+        <div
+          data-testid='feedback'
+          className='fixed top-0 right-0 bg-slate-100 min-h-screen max-w-sm p-10 z-[2]'
+        >
           <div className='py-3'>
-            <AiOutlineCloseCircle className='text-lg cursor-pointer' onClick={toggleActive} />
+            <AiOutlineCloseCircle
+              data-testid='close'
+              className='text-lg cursor-pointer'
+              onClick={toggleActive}
+            />
           </div>
           {view === 'recommend' && <FeedBackOverall changeView={changeView} />}
-          {view === 'user' && <FeedbackUser changeView={changeView} />}
+          {view === 'user' && <FeedbackUser data-testid='feedbackUser' changeView={changeView} />}
           {view === 'thanks' && <FeedbackThanks />}
         </div>
       )}

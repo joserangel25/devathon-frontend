@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useModal } from '../../hooks/useModal';
-import { restart } from '../../store/feedback/feedbackslice';
+import { useModal } from '../../../hooks/useModal';
+import { restart } from '../../../store/feedback/feedbackslice';
 import { useDispatch } from 'react-redux';
 
 export const FeedbackLogic = () => {
