@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { registerValidations } from '../../../validations/register.validtions';
+import { registerValidations } from '../../../validations/register.validations';
 
 export const RegisterLogic = () => {
   // validate the inputs
