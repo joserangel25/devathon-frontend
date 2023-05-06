@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const base = {
   user: null,
   isLoading: false,
-  emailError: '',
-  passwordError: '',
+  errors: null,
+  isCreated: false,
 };
 
 export const authSlice = createSlice({
@@ -14,16 +14,16 @@ export const authSlice = createSlice({
     setIsLoading(state) {
       state.isLoading = !state.isLoading;
     },
+    setIsCreated(state) {
+      state.isCreated = !state.isCreated;
+    },
     setUser(state, { payload }) {
       state.user = payload;
     },
-    setEmailError(state, action) {
-      state.emailError = action.payload;
-    },
-    setPasswordError(state, action) {
-      state.passwordError = action.payload;
+    setErrors(state, { payload }) {
+      state.errors = payload;
     },
   },
 });
 
-export const { setIsLoading, setUser, setEmailError, setPasswordError } = authSlice.actions;
+export const { setIsLoading, setUser, setErrors, setIsCreated } = authSlice.actions;

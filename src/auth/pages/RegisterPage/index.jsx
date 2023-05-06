@@ -4,9 +4,10 @@ import { useToggle } from '../../../hooks/useToggle';
 import { RegisterLogic } from './RegisterLogic';
 import { Input } from '../../components/Input/';
 import { Form } from '../../components/Form';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
-  const { register, handleSubmit, errors, onSubmit } = RegisterLogic();
+  const { register, handleSubmit, errors, onSubmit, isLoading } = RegisterLogic();
   const [showPassword, toggleShowPassword] = useToggle(false);
   const [showConfirmPassword, toggleShowConfirmPassword] = useToggle(false);
 
@@ -76,7 +77,11 @@ const RegisterPage = () => {
             Al crear una cuenta, aceptas la <strong>Política de privacidad</strong> y los{' '}
             <strong>Términos de uso</strong> de LugarAccesible.
           </p>
-          <button>Registrarse</button>
+          <button>{isLoading ? <div className='lds-dual-ring'></div> : 'Registrarse'}</button>
+          <p>
+            ¿Ya tienes cuenta?
+            <Link to='/auth/login'>Iniciar Sección</Link>
+          </p>
         </Form>
       </section>
     </main>
