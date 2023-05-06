@@ -17,7 +17,7 @@ export default function Login() {
 
   const handleSubmitLogin = () => {
     console.log('Iniciando sesión');
-    setError('');
+    setLoginError('');
 
     if (email === EMAIL_ && password === PASSWORD_) {
       navigate('/');
