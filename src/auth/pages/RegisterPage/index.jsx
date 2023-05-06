@@ -1,20 +1,32 @@
 import { CiUser } from 'react-icons/ci';
-import { AiOutlineMail, AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import {
+  AiOutlineMail,
+  AiOutlineEyeInvisible,
+  AiOutlineEye,
+  AiOutlineLoading3Quarters,
+} from 'react-icons/ai';
 import { useToggle } from '../../../hooks/useToggle';
 import { RegisterLogic } from './RegisterLogic';
 import { Input } from '../../components/Input/';
 import { Form } from '../../components/Form';
 import { Link } from 'react-router-dom';
+import { Error } from '../../components/Error';
+import { Button } from '../../components/button';
 
 const RegisterPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = RegisterLogic();
   const [showPassword, toggleShowPassword] = useToggle(false);
   const [showConfirmPassword, toggleShowConfirmPassword] = useToggle(false);
+  const imageUrl =
+    'https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80';
 
   return (
-    <main>
-      <section></section>
-      <section>
+    <main className='flex min-h-screen flex-wrap'>
+      <section
+        className='flex-1 w-1/2 lg:w-auto bg-cover bg-center'
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></section>
+      <section className='flex items-center justify-center flex-1 w-1/2 lg:w-auto'>
         <Form
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
@@ -31,7 +43,7 @@ const RegisterPage = () => {
           >
             <CiUser />
           </Input>
-          <p className='text-red-700'>{errors.name?.message}</p>
+          <Error content={errors.name?.message}></Error>
           <Input
             register={register}
             name='email'
@@ -42,7 +54,7 @@ const RegisterPage = () => {
           >
             <AiOutlineMail />
           </Input>
-          <p className='text-red-700'>{errors.email?.message}</p>
+          <Error content={errors.email?.message}></Error>
           <Input
             register={register}
             name='password'
@@ -52,12 +64,12 @@ const RegisterPage = () => {
             error={errors.password?.message}
           >
             {showPassword ? (
-              <AiOutlineEye onClick={toggleShowPassword} />
+              <AiOutlineEye onClick={toggleShowPassword} className='cursor-pointer' />
             ) : (
-              <AiOutlineEyeInvisible onClick={toggleShowPassword} />
+              <AiOutlineEyeInvisible onClick={toggleShowPassword} className='cursor-pointer' />
             )}
           </Input>
-          <p className='text-red-700'>{errors.password?.message}</p>
+          <Error content={errors.password?.message}></Error>
           <Input
             register={register}
             name='passwordConfirmation'
@@ -67,20 +79,33 @@ const RegisterPage = () => {
             error={errors.passwordConfirmation?.message}
           >
             {showConfirmPassword ? (
-              <AiOutlineEye onClick={toggleShowConfirmPassword} />
+              <AiOutlineEye onClick={toggleShowConfirmPassword} className='cursor-pointer' />
             ) : (
-              <AiOutlineEyeInvisible onClick={toggleShowConfirmPassword} />
+              <AiOutlineEyeInvisible
+                onClick={toggleShowConfirmPassword}
+                className='cursor-pointer'
+              />
             )}
           </Input>
-          <p className='text-red-700'>{errors.passwordConfirmation?.message}</p>
-          <p>
-            Al crear una cuenta, aceptas la <strong>Política de privacidad</strong> y los{' '}
-            <strong>Términos de uso</strong> de LugarAccesible.
+          <Error content={errors.passwordConfirmation?.message}></Error>
+          <p className='w-full text-neutral-500 pb-5'>
+            Al crear una cuenta, aceptas la{' '}
+            <strong className='text-neutral-700'>Política de privacidad</strong> y los{' '}
+            <strong className='text-neutral-700'>Términos de uso</strong> de LugarAccesible.
           </p>
-          <button>{isLoading ? <div className='lds-dual-ring'></div> : 'Registrarse'}</button>
-          <p>
+          <Button>
+            {isLoading ? (
+              <AiOutlineLoading3Quarters className='animate-spin w-full text-pk' />
+            ) : (
+              'Registrarse'
+            )}
+          </Button>
+          <p className='w-full text-neutral-500 py-3'>
             ¿Ya tienes cuenta?
-            <Link to='/auth/login'>Iniciar Sección</Link>
+            <Link to='/login' className='text-neutral-700 font-bold'>
+              {' '}
+              Iniciar Sección
+            </Link>
           </p>
         </Form>
       </section>
