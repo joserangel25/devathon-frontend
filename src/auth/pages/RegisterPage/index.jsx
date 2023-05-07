@@ -1,10 +1,4 @@
 import { CiUser } from 'react-icons/ci';
-import {
-  AiOutlineMail,
-  AiOutlineEyeInvisible,
-  AiOutlineEye,
-  AiOutlineLoading3Quarters,
-} from 'react-icons/ai';
 import { useToggle } from '../../../hooks/useToggle';
 import { RegisterLogic } from './RegisterLogic';
 import { Input } from '../../components/Input/';
@@ -12,21 +6,30 @@ import { Form } from '../../components/Form';
 import { Link } from 'react-router-dom';
 import { Error } from '../../components/Error';
 import { Button } from '../../components/button';
+import {
+  AiOutlineMail,
+  AiOutlineEyeInvisible,
+  AiOutlineEye,
+  AiOutlineLoading3Quarters,
+} from 'react-icons/ai';
 
 const RegisterPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = RegisterLogic();
   const [showPassword, toggleShowPassword] = useToggle(false);
   const [showConfirmPassword, toggleShowConfirmPassword] = useToggle(false);
-  const imageUrl =
-    'https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80';
+  const imageBack = '/assets/images/openMap-back.jpg';
 
   return (
     <main className='flex min-h-screen flex-wrap'>
       <section
-        className='flex-1 w-1/2 lg:w-auto bg-cover bg-center'
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></section>
-      <section className='flex items-center justify-center flex-1 w-1/2 lg:w-auto'>
+        className='basis-full flex justify-center items-center lg:justify-normal lg:items-baseline lg:basis-1/2 bg-cover bg-center'
+        style={{ backgroundImage: `url(${imageBack})` }}
+      >
+        <article className='lg:p-11'>
+          <img src='/assets/logo/logo.svg' alt='logo' />
+        </article>
+      </section>
+      <section className='flex basis-full lg:basis-1/2 items-center justify-center'>
         <Form
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}

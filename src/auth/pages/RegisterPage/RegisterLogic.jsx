@@ -13,11 +13,11 @@ export const RegisterLogic = () => {
   const { isLoading, isCreated } = useSelector((state) => state.auth);
 
   const userCreated = () => {
-    toast.success('Usuario Creado', { position: 'top-left', duration: 2000 });
+    toast.success('Usuario Creado', { position: 'top-right', duration: 2000 });
 
     // redirect the user after the user have created
     setTimeout(() => {
-      navigate('/auth/login');
+      navigate('/login');
     }, 2500);
   };
 
