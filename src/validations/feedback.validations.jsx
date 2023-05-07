@@ -7,6 +7,6 @@ export const feedbackValidationOverall = yup.object().shape({
 });
 
 export const feedbackValidationUser = yup.object().shape({
-  name: yup.string().required('El Nombre es requirido'),
+  name: yup.string().required('El Nombre es requerido'),
   email: yup.string().email('Parece que esto no es un email').required('El Email es requerido'),
 });
