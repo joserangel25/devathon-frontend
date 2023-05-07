@@ -4,6 +4,7 @@ import { environment } from '../../settings/environment';
 import { useActionsMap } from './useActionsMap';
 import { usePlacesStore } from './usePlacesStore';
 import { useMapStore } from './useMapStore';
+import { useActionsPlaces } from './useActionsPlaces';
 
 const mapOptions = {
   controlSize: 40,
@@ -21,9 +22,9 @@ const loader = new Loader({
 });
 
 export const useMap = () => {
-  const { userLocation } = usePlacesStore();
-  const { deniedLocation } = usePlacesStore();
+  const { userLocation, deniedLocation, nearbyPlaces } = usePlacesStore();
   const { map, isLoading } = useMapStore();
+  const { doGetNearbyPlaces, doPrintNearbyPlaces } = useActionsPlaces();
   const { doSetMap } = useActionsMap();
   const refElement = useRef(null);
 
@@ -46,7 +47,6 @@ export const useMap = () => {
       const infoMarker = new window.google.maps.InfoWindow({
         content: 'Estas aquí',
       });
-
       const marker = new window.google.maps.Marker({
         position: userLocation,
         map,
@@ -67,7 +67,17 @@ export const useMap = () => {
     const { lat, lng } = userLocation;
     const newCenter = new window.google.maps.LatLng(lat, lng);
     map.setCenter(newCenter);
+
+    // get nearby places
+    doGetNearbyPlaces();
   }, [isLoading, map, userLocation, deniedLocation]);
+
+  useEffect(() => {
+    // print nearby places in the map
+    if (map && !deniedLocation && nearbyPlaces) {
+      doPrintNearbyPlaces();
+    }
+  }, [nearbyPlaces, deniedLocation, map]);
 
   return {
     refElement,
