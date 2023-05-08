@@ -51,7 +51,7 @@ const RegisterPage = () => {
             register={register}
             name='email'
             type='text'
-            placeholder='Correo Eletronico'
+            placeholder='Email'
             autoComplete='email'
             error={errors.email?.message}
           >

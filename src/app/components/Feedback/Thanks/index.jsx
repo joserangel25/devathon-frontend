@@ -1,12 +1,15 @@
-import { feedbackText } from '../../../../helpers/feedback.text';
-
 export const FeedbackThanks = () => {
-  const { feedbackThanks } = feedbackText();
   return (
     <article>
-      <h3 className='font-bold'>{feedbackThanks.title}</h3>
-      <p>{feedbackThanks.para}</p>
-      <p>{feedbackThanks.paraTwo}</p>
+      <p className='text-neutral-500 pb-6 text-pt'>
+        Estamos aquí para <strong>escuchar</strong> y hacer que tu <strong>experiencia</strong> con
+        nosotros sea aún mejor.Tu feedback nos ayuda a <strong> alcanzar el siguiente nivel</strong>{' '}
+        en LugarAccesible.
+      </p>
+      <p className='text-neutral-500 text-pt'>
+        <strong>Agradecemos</strong> el tiempo y esfuerzo que tomaste para revisar nuestro trabajo y
+        <strong>compartir tus pensamientos</strong> con nosotros.
+      </p>
     </article>
   );
 };

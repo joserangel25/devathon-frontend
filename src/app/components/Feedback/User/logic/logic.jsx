@@ -1,12 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { feedbackValidationUser } from '../../../../../validations/feedback.validations';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { feedbackText } from '../../../../../helpers/feedback.text';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitFeedback } from '../../../../../store/feedback/thunks';
 
 export const userLogic = (changeView) => {
-  const { feedbackUser } = feedbackText();
   const dispatch = useDispatch();
 
   const feedback = useSelector((state) => state.feedback);
@@ -39,6 +37,5 @@ export const userLogic = (changeView) => {
     handleSubmit,
     onSubmit,
     errors,
-    feedbackUser,
   };
 };
