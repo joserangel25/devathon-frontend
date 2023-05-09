@@ -1,13 +1,12 @@
 import { feedbackValidationOverall } from '../../../../../validations/feedback.validations';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { feedbackText } from '../../../../../helpers/feedback.text';
 import { setStates } from '../../../../../store/feedback/feedbackslice';
 import { useDispatch } from 'react-redux';
 
 export const overallLogic = (changeView) => {
-  const numbers = [...Array(10).keys()];
-  const { feedbackOverall } = feedbackText();
+  const numbers = [...Array(11).keys()];
+
   const dispatch = useDispatch();
 
   // validate the inputs
@@ -27,7 +26,6 @@ export const overallLogic = (changeView) => {
 
   return {
     numbers,
-    feedbackOverall,
     register,
     handleSubmit,
     errors,

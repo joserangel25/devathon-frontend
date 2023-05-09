@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useModal } from '../../../hooks/useModal';
+import { useToggle } from '../../../hooks/useToggle';
 import { restart } from '../../../store/feedback/feedbackslice';
 import { useDispatch } from 'react-redux';
 
 export const FeedbackLogic = () => {
-  const [active, toggleActive] = useModal(false);
+  const [active, toggleActive] = useToggle(false);
   const [view, setView] = useState('recommend');
   const dispatch = useDispatch();
   const changeView = (value) => {

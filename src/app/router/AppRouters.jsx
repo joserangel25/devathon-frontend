@@ -3,16 +3,14 @@ import HomePage from '../pages/HomePage';
 import { AppLayout } from '../layout/AppLayout';
 import Login from '../pages/Login';
 
-export const AppRoutes = () => {
+export const AppRouters = () => {
   return (
     <Routes>
       <Route path='/' element={<AppLayout />}>
-        <Route path='home' element={<HomePage />} />
-        <Route path='login' element={<Login />} />
-        <Route path='register' element={<h2>Registrate</h2>} />
+        <Route index element={<HomePage />} />
       </Route>
 
-      <Route path='/*' element={<Navigate to='/' />} />
+      <Route path='*' element={<Navigate to='/' />} />
     </Routes>
   );
 };
