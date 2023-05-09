@@ -11,7 +11,7 @@ export const LoginLogic = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isLoading, isCreated } = useSelector((state) => state.auth);
+  const { isLoading, isLogued, errors: errorLogin } = useSelector((state) => state.auth);
 
   const userLogIn = () => {
     toast.success('¡Te has logueado exitosamente!', { position: 'top-right', duration: 2000 });
@@ -22,11 +22,17 @@ export const LoginLogic = () => {
     }, 2500);
   };
 
-  // useEffect(() => {
-  //   if (isCreated) {
-  //     userLogIn();
-  //   }
-  // }, [isCreated]);
+  useEffect(() => {
+    if (errorLogin?.data) {
+      toast.error(`${errorLogin.data.message}`, { position: 'bottom-right', duration: 4000 });
+    }
+  }, [errorLogin]);
+
+  useEffect(() => {
+    if (isLogued) {
+      userLogIn();
+    }
+  }, [isLogued]);
 
   // validate the inputs
   const {
@@ -39,9 +45,7 @@ export const LoginLogic = () => {
 
   // the data is already validate
   const onSubmit = async (data) => {
-    // console.log(data);
     dispatch(submitLogin(data));
-    navigate('/');
   };
 
   return {

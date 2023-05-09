@@ -15,7 +15,7 @@ import {
 const LoginPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = LoginLogic();
   const [showPassword, toggleShowPassword] = useToggle(false);
-  const imageBack = '/assets/images/openMap-back.jpg';
+  const imageBack = '/assets/images/book-back.jpg';
 
   return (
     <main className='flex min-h-screen flex-wrap'>

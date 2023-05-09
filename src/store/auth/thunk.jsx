@@ -1,4 +1,4 @@
-import { setIsLoading, setErrors, setIsCreated, setUser } from './authSlice';
+import { setIsLoading, setErrors, setIsCreated, setUser, setLogued } from './authSlice';
 import LugarAccesibleApi from '../../api/LugarAccesibleApi';
 
 export const submitRegister = (form) => {
@@ -24,6 +24,7 @@ export const submitLogin = (form) => {
       if (data) {
         sessionStorage.setItem('jwt', data.accessToken);
         dispatch(setUser(data));
+        dispatch(setLogued());
       }
     } catch (error) {
       const { response } = error;
