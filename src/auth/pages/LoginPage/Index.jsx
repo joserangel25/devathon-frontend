@@ -11,6 +11,7 @@ import {
   AiOutlineEye,
   AiOutlineLoading3Quarters,
 } from 'react-icons/ai';
+import logoWeb from '/assets/logo/logo.svg';
 
 const LoginPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = LoginLogic();
@@ -20,14 +21,14 @@ const LoginPage = () => {
   return (
     <main className='flex min-h-screen flex-wrap'>
       <section
-        className='basis-full flex justify-center items-center lg:justify-normal lg:items-baseline lg:basis-1/2 bg-cover bg-center'
+        className='basis-full flex justify-center items-center lg:justify-normal lg:items-baseline lg:basis-1/2 bg-cover bg-center '
         style={{ backgroundImage: `url(${imageBack})` }}
       >
-        <article className='lg:p-11'>
+        <figure className='lg:p-11'>
           <Link to='/'>
-            <img src='/assets/logo/logo.svg' alt='logo' />
+            <img src={logoWeb} alt='logo de la web LugarAccesible' className='w-[250px]' />
           </Link>
-        </article>
+        </figure>
       </section>
       <section className='flex basis-full lg:basis-1/2 items-center justify-center'>
         <Form
