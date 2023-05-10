@@ -15,7 +15,7 @@ import {
 const LoginPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = LoginLogic();
   const [showPassword, toggleShowPassword] = useToggle(false);
-  const imageBack = '/assets/images/book-back.jpg';
+  const imageBack = '/assets/images/background-login.jpg';
 
   return (
     <main className='flex min-h-screen flex-wrap'>
@@ -24,7 +24,9 @@ const LoginPage = () => {
         style={{ backgroundImage: `url(${imageBack})` }}
       >
         <article className='lg:p-11'>
-          <img src='/assets/logo/logo.svg' alt='logo' />
+          <Link to='/'>
+            <img src='/assets/logo/logo.svg' alt='logo' />
+          </Link>
         </article>
       </section>
       <section className='flex basis-full lg:basis-1/2 items-center justify-center'>
