@@ -12,7 +12,6 @@ import {
   AiOutlineEye,
   AiOutlineLoading3Quarters,
 } from 'react-icons/ai';
-import logoWeb from '/assets/logo/logo.svg';
 
 const RegisterPage = () => {
   const { register, handleSubmit, errors, onSubmit, isLoading } = RegisterLogic();
@@ -28,7 +27,7 @@ const RegisterPage = () => {
       >
         <figure className='lg:p-11'>
           <Link to='/'>
-            <img src={logoWeb} alt='logo de la web LugarAccesible' className='w-[250px]' />
+            <img src='/assets/logo/logo.svg' alt='logo de la web LugarAccesible' />
           </Link>
         </figure>
       </section>
