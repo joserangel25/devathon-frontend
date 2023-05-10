@@ -1,11 +1,14 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 import { loginValidations } from '../../../validations/login.validations';
 import { submitLogin } from '../../../store/auth/thunk';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+
+import { setErrors } from '../../../store/auth/authSlice';
 
 export const LoginLogic = () => {
   const navigate = useNavigate();
@@ -13,24 +16,28 @@ export const LoginLogic = () => {
 
   const { isLoading, isLogued, errors: errorLogin } = useSelector((state) => state.auth);
 
-  const userLogIn = () => {
+  const LogInCorrect = () => {
     toast.success('¡Te has logueado exitosamente!', { position: 'top-right', duration: 2000 });
 
     // redirect the user after the user have created
     setTimeout(() => {
       navigate('/');
-    }, 2500);
+    }, 2200);
   };
 
   useEffect(() => {
     if (errorLogin?.data) {
-      toast.error(`${errorLogin.data.message}`, { position: 'bottom-right', duration: 4000 });
+      toast.error(`${errorLogin.data.message}`, { position: 'top-right', duration: 4000 });
     }
+
+    return () => {
+      dispatch(setErrors(null));
+    };
   }, [errorLogin]);
 
   useEffect(() => {
     if (isLogued) {
-      userLogIn();
+      LogInCorrect();
     }
   }, [isLogued]);
 
