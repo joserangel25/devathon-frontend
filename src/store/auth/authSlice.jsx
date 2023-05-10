@@ -5,6 +5,7 @@ const base = {
   isLoading: false,
   errors: null,
   isCreated: false,
+  isLogued: false,
 };
 
 export const authSlice = createSlice({
@@ -20,10 +21,13 @@ export const authSlice = createSlice({
     setUser(state, { payload }) {
       state.user = payload;
     },
+    setLogued(state) {
+      state.isLogued = !state.isLogued;
+    },
     setErrors(state, { payload }) {
       state.errors = payload;
     },
   },
 });
 
-export const { setIsLoading, setUser, setErrors, setIsCreated } = authSlice.actions;
+export const { setIsLoading, setUser, setErrors, setIsCreated, setLogued } = authSlice.actions;

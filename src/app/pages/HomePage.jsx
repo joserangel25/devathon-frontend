@@ -1,3 +1,5 @@
+import Feedback from '../components/Feedback';
+
 const Homepage = () => {
   return (
     <main>
@@ -8,6 +10,7 @@ const Homepage = () => {
         architecto! Ducimus laudantium aut velit sapiente laborum nostrum, distinctio qui voluptas
         doloremque placeat vero omnis, aliquam voluptatibus ipsum quia quisquam.
       </p>
+      <Feedback />
     </main>
   );
 };
