@@ -13,8 +13,8 @@ export const FeedBackOverall = ({ changeView }) => {
     <div data-testid='feedback-overall'>
       <p className='text-neutral-500 pb-7'>
         No te limites, bien o mal, <strong>dínoslo</strong> Por favor, ayúdanos a mejorar
-        <strong>compartiendo</strong> tus comentarios sobre tu experiencia con la aplicación de
-        <strong>accesibilidad.</strong>
+        <strong> compartiendo</strong> tus comentarios sobre tu experiencia con la aplicación de
+        <strong> accesibilidad.</strong>
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,7 +50,7 @@ export const FeedBackOverall = ({ changeView }) => {
           type='text'
           placeholder='Asunto'
           autoComplete='off'
-          error={errors.overallSatisfaction?.message}
+          error={errors.subject?.message}
         >
           <MdTitle />
         </Input>
