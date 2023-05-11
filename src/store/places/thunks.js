@@ -8,7 +8,6 @@ export const getNearbyPlaces = () => {
       const nearbyPlaces = await resp.json();
       dispatch(setNearbyPlaces(nearbyPlaces.results));
     } catch (error) {
-      console.log(error);
       toast.error(`ERROR al cargar los lugares cercanos`, {
         position: 'top-right',
       });
