@@ -73,7 +73,7 @@ const LoginPage = () => {
           </Button>
           <p className='w-full text-neutral-500 py-3'>
             No tienes una cuenta?
-            <Link to='/register' className='text-neutral-700 font-bold'>
+            <Link to='/auth/register' className='text-neutral-700 font-bold'>
               {' '}
               Regístrate
             </Link>

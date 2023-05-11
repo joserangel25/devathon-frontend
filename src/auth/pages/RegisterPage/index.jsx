@@ -107,7 +107,7 @@ const RegisterPage = () => {
           </Button>
           <p className='w-full text-neutral-500 py-3'>
             ¿Ya tienes cuenta?
-            <Link to='/login' className='text-neutral-700 font-bold'>
+            <Link to='/auth/login' className='text-neutral-700 font-bold'>
               {' '}
               Iniciar Sección
             </Link>
