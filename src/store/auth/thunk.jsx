@@ -21,14 +21,18 @@ export const submitLogin = (form) => {
     try {
       dispatch(setIsLoading()); // is loading to true
       const { data } = await LugarAccesibleApi.post('users/login', form);
-      if (data) {
+
+      if (!data?.status) {
+        dispatch(setErrors(data?.response)); // set errors
+      } else {
         sessionStorage.setItem('jwt', data.accessToken);
         dispatch(setUser(data));
         dispatch(setLogued());
       }
     } catch (error) {
+      console.log(error);
       const { response } = error;
-      dispatch(setErrors(response)); // set errors
+      dispatch(setErrors(response.data?.response)); // set errors
     } finally {
       dispatch(setIsLoading());
     }
