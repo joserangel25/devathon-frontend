@@ -64,7 +64,7 @@ const LoginPage = () => {
           </Input>
           <Error content={errors.password?.message}></Error>
 
-          <Button>
+          <Button isDisabled={isLoading}>
             {isLoading ? (
               <AiOutlineLoading3Quarters className='animate-spin w-full text-pk' />
             ) : (
