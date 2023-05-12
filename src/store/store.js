@@ -3,6 +3,7 @@ import { mapSlice } from './map/mapSlice';
 import { placesSlice } from './places/placesSlice';
 import { feedbackSlice } from './feedback/feedbackslice';
 import { authSlice } from './auth/authSlice';
+import { searchSlice } from './search/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     places: placesSlice.reducer,
     feedback: feedbackSlice.reducer,
     auth: authSlice.reducer,
+    search: searchSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

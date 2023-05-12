@@ -27,7 +27,14 @@ export const authSlice = createSlice({
     setErrors(state, { payload }) {
       state.errors = payload;
     },
+    setLogOut(state) {
+      state.user = null;
+      state.isLogued = false;
+      state.errors = null;
+      sessionStorage.removeItem('jwt');
+    },
   },
 });
 
-export const { setIsLoading, setUser, setErrors, setIsCreated, setLogued } = authSlice.actions;
+export const { setIsLoading, setUser, setErrors, setIsCreated, setLogued, setLogOut } =
+  authSlice.actions;

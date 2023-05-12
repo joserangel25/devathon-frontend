@@ -1,14 +1,31 @@
 import { AiOutlineSearch, AiOutlineHeart } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import { CiLogout } from 'react-icons/ci';
+import { MdOutlineHistory } from 'react-icons/md';
 import { Select } from './Select';
 import { SearchLogic } from './SearchLogic';
 import { Link } from 'react-router-dom';
 import { Option } from './option';
 
 export const Search = () => {
-  const { options, user, userOptions, toggleUserOptions, titleOption, changeTitleOption } =
-    SearchLogic();
+  const {
+    queryValue,
+    options,
+    user,
+    userOptions,
+    toggleUserOptions,
+    titleOption,
+    searchHistory,
+    isActiveInput,
+    inputRef,
+    changeTitleOption,
+    closeUserSession,
+    setQueryValue,
+    search,
+    handleFocus,
+    handleBlur,
+    deleteHistory,
+  } = SearchLogic();
 
   return (
     <header className='fixed top-0 bg-white w-full h-[56px]  right-0 z-[2] flex items-center justify-between px-4 flex-wrap  shadow-lg shadow-neutral-300/40 '>
@@ -19,22 +36,56 @@ export const Search = () => {
         </picture>
         {/* end logo */}
 
-        <div className='bg-yellow-900 w-full relative max-w-[600px]'>
-          <input
-            type='text'
-            placeholder='Buscar Lugar'
-            className='w-full h-full placeholder:text-neutral-500 pl-4 outline-none text-neutral-700 border-[1px] border-neutral-300'
-          />
-
-          <div className='absolute right-16 top-0 h-full'>
-            <Select
-              options={options}
-              titleOption={titleOption}
-              changeTitleOption={changeTitleOption}
+        <div className='bg-yellow-900 w-full max-w-[600px] flex'>
+          {/* container input */}
+          <div className='bg-blue-500 relative h-full basis-full' onBlur={handleBlur}>
+            <input
+              type='text'
+              onChange={(event) => setQueryValue(event.target.value)}
+              value={queryValue}
+              onFocus={handleFocus}
+              ref={inputRef}
+              placeholder='Buscar Lugar'
+              className='w-full h-full placeholder:text-neutral-500 pl-4 outline-neutral-300 text-neutral-700 border-[1px] border-neutral-300'
             />
-          </div>
 
-          <div className='absolute right-0 bg-primary-900 h-full top-0 w-[50px] text-white text-3xl flex items-center justify-center hover:bg-primary-700 cursor-pointer'>
+            {isActiveInput && searchHistory.length > 0 && (
+              <div className='bg-white absolute w-[100%] border-[1px] border-neutral-100 rounded-[10px]'>
+                {searchHistory.map((history, index) => (
+                  <button
+                    onClick={() => {
+                      setQueryValue(history.query);
+                      inputRef.current.focus();
+                    }}
+                    key={history + index}
+                    data-focus
+                    className='flex justify-between px-4 w-full hover:bg-neutral-100 py-2'
+                  >
+                    <span className='flex gap-x-2 items-center'>
+                      <MdOutlineHistory className='text-neutral-700' />{' '}
+                      <span className='text-neutral-500 cursor-default'>{history.query}</span>
+                    </span>
+                    <a onClick={() => deleteHistory(index)} className='text-pm text-primary-700'>
+                      Eliminar
+                    </a>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className='absolute right-2 top-0 h-full'>
+              <Select
+                options={options}
+                titleOption={titleOption}
+                changeTitleOption={changeTitleOption}
+              />
+            </div>
+          </div>
+          {/* end container input */}
+          <div
+            onClick={search}
+            className='bg-primary-900 basis-[50px] h-full w-[50px] text-white text-3xl flex items-center justify-center hover:bg-primary-700 cursor-pointer'
+          >
             <AiOutlineSearch />
           </div>
         </div>
@@ -68,10 +119,12 @@ export const Search = () => {
                   <AiOutlineHeart className='text-neutral-700 text-2xl' />
                   <p className='text-neutral-500  basis-full text-center'>Favoritos</p>
                 </Option>
-                <Option>
-                  <CiLogout className='text-neutral-700 text-2xl' />
-                  <p className='text-neutral-500  basis-full text-center'>Cerrar sesión</p>
-                </Option>
+                <div onClick={closeUserSession}>
+                  <Option>
+                    <CiLogout className='text-neutral-700 text-2xl' />
+                    <p className='text-neutral-500  basis-full text-center'>Cerrar sesión</p>
+                  </Option>
+                </div>
               </div>
             )}
           </article>

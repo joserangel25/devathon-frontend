@@ -23,7 +23,7 @@ export const Select = ({ options, titleOption, changeTitleOption }) => {
       </div>
       {/* select'menu */}
       {showOptions && (
-        <div className='w-[200px] absolute right-0 border-[1px] border-neutral-100'>
+        <div className='w-[200px] absolute right-0 border-[1px] border-neutral-100 selection:bg-transparent'>
           {options.map((option) => (
             <div
               key={option.title}
