@@ -34,7 +34,7 @@ const LoginPage = () => {
         <Form
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
-          title='Iniciar Sesión'
+          title='Iniciar sesión'
           paragraph='Accede a tu cuenta para manejar y controlar tus rutas.'
         >
           <Input
@@ -64,7 +64,7 @@ const LoginPage = () => {
           </Input>
           <Error content={errors.password?.message}></Error>
 
-          <Button>
+          <Button isDisabled={isLoading}>
             {isLoading ? (
               <AiOutlineLoading3Quarters className='animate-spin w-full text-pk' />
             ) : (
@@ -72,7 +72,7 @@ const LoginPage = () => {
             )}
           </Button>
           <p className='w-full text-neutral-500 py-3'>
-            No tienes una cuenta?
+            ¿No tienes una cuenta?
             <Link to='/auth/register' className='text-neutral-700 font-bold'>
               {' '}
               Regístrate

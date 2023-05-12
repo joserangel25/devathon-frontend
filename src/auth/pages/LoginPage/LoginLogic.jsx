@@ -26,18 +26,18 @@ export const LoginLogic = () => {
   };
 
   useEffect(() => {
-    if (errorLogin?.data) {
-      toast.error(`${errorLogin.data.message}`, { position: 'top-right', duration: 4000 });
+    if (errorLogin?.msn) {
+      toast.error(`${errorLogin?.msn}`, { position: 'top-right', duration: 2000 });
+      setTimeout(() => {
+        dispatch(setErrors(null));
+      }, 2000);
     }
-
-    return () => {
-      dispatch(setErrors(null));
-    };
   }, [errorLogin]);
 
   useEffect(() => {
     if (isLogued) {
       LogInCorrect();
+      dispatch(setErrors(null));
     }
   }, [isLogued]);
 
