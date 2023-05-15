@@ -17,6 +17,9 @@ export const searchSlice = createSlice({
   name: 'searchSlice',
   initialState: base,
   reducers: {
+    setIsLoading(state) {
+      state.isLoading = !state.isLoading;
+    },
     setQuery(state, action) {
       state.query = action.payload;
 
@@ -38,6 +41,9 @@ export const searchSlice = createSlice({
     setTypes(state, action) {
       state.types = action.payload;
     },
+    setResults(state, action) {
+      state.results = action.payload;
+    },
     deleteOneSearchHistory(state, action) {
       const index = action.payload;
       state.searchHistory.splice(index, 1);
@@ -47,4 +53,5 @@ export const searchSlice = createSlice({
     },
   },
 });
-export const { setQuery, setTypes, deleteOneSearchHistory } = searchSlice.actions;
+export const { setIsLoading, setQuery, setTypes, deleteOneSearchHistory, setResults } =
+  searchSlice.actions;

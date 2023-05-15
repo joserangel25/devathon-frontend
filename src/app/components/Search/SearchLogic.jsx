@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogOut } from '../../../store/auth/authSlice';
 import { setQuery, deleteOneSearchHistory } from '../../../store/search/searchSlice';
+import { getResults } from '../../../store/search/thunk';
 import { useToggle } from '../../../hooks/useToggle';
 import { useState, useRef } from 'react';
 import {
@@ -14,10 +16,13 @@ import { BsPiggyBankFill } from 'react-icons/bs';
 
 export const SearchLogic = () => {
   const { user } = useSelector((state) => state.auth);
-  const { searchHistory } = useSelector((state) => state.search);
+  const { userLocation } = useSelector((state) => state.places);
+  const { searchHistory, results, isLoading } = useSelector((state) => state.search);
   const [userOptions, toggleUserOptions] = useToggle(false);
   const [titleOption, setTitleOption] = useState('Todos');
+  const [titleValue, setTitleValue] = useState('');
   const [queryValue, setQueryValue] = useState('');
+  const [showResults, toggleShowResults] = useToggle(false);
   const [isActiveInput, setIsActiveInput] = useState(false);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
@@ -36,7 +41,6 @@ export const SearchLogic = () => {
   }
 
   const deleteHistory = (index) => {
-    console.log(index);
     dispatch(deleteOneSearchHistory(index));
   };
 
@@ -46,11 +50,22 @@ export const SearchLogic = () => {
 
   const search = () => {
     dispatch(setQuery(queryValue));
+    const newSearch = {
+      query: queryValue,
+      lat: userLocation.lat,
+      lng: userLocation.lng,
+      types: titleValue,
+    };
+    if (!showResults) toggleShowResults();
+    dispatch(getResults(newSearch));
+    console.log(results);
   };
 
-  const changeTitleOption = (title) => {
+  const changeTitleOption = (title, value) => {
     setTitleOption(title);
+    setTitleValue(value);
   };
+
   // options select open
   const options = [
     {
@@ -94,6 +109,9 @@ export const SearchLogic = () => {
     searchHistory,
     isActiveInput,
     inputRef,
+    showResults,
+    toggleShowResults,
+    isLoading,
     changeTitleOption,
     closeUserSession,
     setQueryValue,
@@ -101,5 +119,6 @@ export const SearchLogic = () => {
     handleFocus,
     handleBlur,
     deleteHistory,
+    results,
   };
 };
