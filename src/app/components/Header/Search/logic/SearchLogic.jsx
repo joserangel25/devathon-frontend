@@ -1,24 +1,12 @@
-/* eslint-disable no-unused-vars */
 import { useSelector, useDispatch } from 'react-redux';
-import { setLogOut } from '../../../store/auth/authSlice';
-import { setQuery, deleteOneSearchHistory } from '../../../store/search/searchSlice';
-import { getResults } from '../../../store/search/thunk';
-import { useToggle } from '../../../hooks/useToggle';
+import { setQuery, deleteOneSearchHistory } from '../../../../../store/search/searchSlice';
+import { getResults } from '../../../../../store/search/thunk';
+import { useToggle } from '../../../../../hooks/useToggle';
 import { useState, useRef } from 'react';
-import {
-  MdRestaurantMenu,
-  MdHotel,
-  MdLocalHospital,
-  MdShoppingCart,
-  MdHomeWork,
-} from 'react-icons/md';
-import { BsPiggyBankFill } from 'react-icons/bs';
 
 export const SearchLogic = () => {
-  const { user } = useSelector((state) => state.auth);
   const { userLocation } = useSelector((state) => state.places);
   const { searchHistory, results, isLoading } = useSelector((state) => state.search);
-  const [userOptions, toggleUserOptions] = useToggle(false);
   const [titleOption, setTitleOption] = useState('Todos');
   const [titleValue, setTitleValue] = useState('');
   const [queryValue, setQueryValue] = useState('');
@@ -44,11 +32,8 @@ export const SearchLogic = () => {
     dispatch(deleteOneSearchHistory(index));
   };
 
-  const closeUserSession = () => {
-    dispatch(setLogOut());
-  };
-
   const search = () => {
+    if (queryValue.length === 0) return;
     dispatch(setQuery(queryValue));
     const newSearch = {
       query: queryValue,
@@ -66,59 +51,21 @@ export const SearchLogic = () => {
     setTitleValue(value);
   };
 
-  // options select open
-  const options = [
-    {
-      title: 'Todos',
-      value: '',
-      icon: <MdHomeWork />,
-    },
-    {
-      title: 'Restaurantes',
-      value: 'restaurant',
-      icon: <MdRestaurantMenu />,
-    },
-    {
-      title: 'Hoteles',
-      value: 'lodging',
-      icon: <MdHotel />,
-    },
-    {
-      title: 'Hospitales',
-      value: 'hospital',
-      icon: <MdLocalHospital />,
-    },
-    {
-      title: 'Bancos',
-      value: 'bank',
-      icon: <BsPiggyBankFill />,
-    },
-    {
-      title: 'Supermercados',
-      value: 'supermarket',
-      icon: <MdShoppingCart />,
-    },
-  ];
   return {
-    options,
-    user,
-    userOptions,
-    toggleUserOptions,
     titleOption,
     queryValue,
     searchHistory,
     isActiveInput,
     inputRef,
+    results,
     showResults,
     toggleShowResults,
     isLoading,
     changeTitleOption,
-    closeUserSession,
     setQueryValue,
     search,
     handleFocus,
     handleBlur,
     deleteHistory,
-    results,
   };
 };

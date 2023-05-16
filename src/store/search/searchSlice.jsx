@@ -53,5 +53,6 @@ export const searchSlice = createSlice({
     },
   },
 });
+
 export const { setIsLoading, setQuery, setTypes, deleteOneSearchHistory, setResults } =
   searchSlice.actions;

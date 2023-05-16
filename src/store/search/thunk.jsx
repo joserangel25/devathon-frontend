@@ -4,9 +4,8 @@ import axios from 'axios';
 export const getResults = (searchObject) => {
   return async (dispatch) => {
     dispatch(setIsLoading()); // is loading to true
-    dispatch(setResults([])); // set to default again
+    dispatch(setResults([])); // set to default for every new request
     try {
-      console.log(searchObject);
       // this is temporaly xd
       const { data } = await axios.get(
         `http://localhost:3000/search?lat=${searchObject.lat}&lng=${searchObject.lng}&query=${
