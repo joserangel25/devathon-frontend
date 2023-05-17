@@ -9,11 +9,12 @@ export const User = () => {
   const { user, userOptions, toggleUserOptions, closeUserSession } = UserLogic();
 
   return (
-    <article className='basis-full lg:basis-1/2 h-[40px] flex justify-end border[1px] border-primary-900'>
+    <article className='basis-1/2 h-[40px] flex justify-end border[1px] border-primary-900'>
       {!user && (
         <Link to='/auth/login'>
-          <button className='bg-primary-900 h-full px-4 text-white justify-center flex items-center gap-x-2'>
-            <BiUser className='text-xl' /> Iniciar sesión
+          <button className='h-full lg:px-4 lg:bg-primary-900 lg:text-white  text-neutral-700 justify-center flex items-center gap-x-2 text-neutral-700'>
+            <BiUser className='text-2xl lg:text-xl' />{' '}
+            <span className='hidden lg:flex'>Iniciar sesión</span>
           </button>
         </Link>
       )}
