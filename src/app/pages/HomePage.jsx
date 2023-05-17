@@ -5,6 +5,7 @@ import { useActionsPlaces } from '../hooks/useActionsPlaces';
 import { ButtonLocationUser } from '../components/map/ButtonLocationUser';
 import Feedback from '../components/Feedback';
 import { Header } from '../components/Header';
+import { Filter } from '../components/Filter';
 
 const Homepage = () => {
   const { deniedLocation } = usePlacesStore();
@@ -13,6 +14,7 @@ const Homepage = () => {
   return (
     <>
       <Header />
+      <Filter />
       <MapView />
       {deniedLocation && <ErrorAccessLocation />}
       <ButtonLocationUser />

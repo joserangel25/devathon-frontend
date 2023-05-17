@@ -26,7 +26,7 @@ const Search = () => {
   } = SearchLogic();
   return (
     <article className='w-full h-[40px] basis-[10%] lg:basis-full'>
-      <div className='fixed lg:static lg:top-0 w-[94%] lg:w-full top-[55px] left-[1%] flex max-w-[600px] h-full'>
+      <div className='fixed lg:static lg:top-0 w-[94%] lg:w-full top-[55px] left-[1%] flex max-w-[600px]'>
         {/* container input */}
         <div className='bg-blue-500 relative h-[40px] basis-full' onBlur={handleBlur}>
           <input
