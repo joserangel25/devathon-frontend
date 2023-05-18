@@ -41,7 +41,7 @@ describe('Register page', () => {
     const nameInput = screen.getByPlaceholderText('Nombre');
     expect(nameInput).toBeInTheDocument();
 
-    const emailInput = screen.getByPlaceholderText('Correo Eletronico');
+    const emailInput = screen.getByPlaceholderText('Email');
     expect(emailInput).toBeInTheDocument();
 
     const passwordInput = screen.getByPlaceholderText('Contraseña');
