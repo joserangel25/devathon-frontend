@@ -15,6 +15,7 @@ const mapOptions = {
   },
   zoomControl: false,
   scaleControl: true,
+  mapId: environment.MAP_ID,
 };
 
 const loader = new Loader({
