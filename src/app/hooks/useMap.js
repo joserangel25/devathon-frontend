@@ -17,6 +17,10 @@ const mapOptions = {
   zoomControl: false,
   scaleControl: true,
   mapId: environment.MAP_ID,
+  // disabled all the buttons that comes by default
+  disableDefaultUI: false,
+  streetViewControl: false,
+  fullscreenControl: false,
 };
 
 const loader = new Loader({
