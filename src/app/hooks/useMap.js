@@ -80,7 +80,11 @@ export const useMap = () => {
     if (map && !deniedLocation && nearbyPlaces) {
       doPrintNearbyPlaces();
     }
-  }, [nearbyPlaces, deniedLocation, map, filter]);
+  }, [nearbyPlaces, deniedLocation, map]);
+
+  useEffect(() => {
+    doPrintNearbyPlaces();
+  }, [filter]);
 
   return {
     refElement,
