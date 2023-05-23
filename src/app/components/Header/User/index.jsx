@@ -6,7 +6,8 @@ import { Option } from '../option';
 import { UserLogic } from './UserLogic';
 
 export const User = () => {
-  const { user, userOptions, toggleUserOptions, closeUserSession } = UserLogic();
+  const { user, userOptions, toggleUserOptions, closeUserSession, toggleModalActive, changeView } =
+    UserLogic();
 
   return (
     <article className='basis-1/2 h-[40px] flex justify-end border[1px] border-primary-900'>
@@ -30,14 +31,28 @@ export const User = () => {
 
           {userOptions && (
             <div className='absolute bg-red-900 right-0 top-[120%] min-w-[180px] border-[1px] border-neutral-100'>
-              <Option>
-                <BiUser className='text-neutral-700 text-2xl' />
-                <p className='text-neutral-500  basis-full text-center'>Tu Cuenta</p>
-              </Option>
-              <Option>
-                <AiOutlineHeart className='text-neutral-700 text-2xl' />
-                <p className='text-neutral-500  basis-full text-center'>Favoritos</p>
-              </Option>
+              <div
+                onClick={() => {
+                  changeView('edit');
+                  toggleModalActive();
+                }}
+              >
+                <Option>
+                  <BiUser className='text-neutral-700 text-2xl' />
+                  <p className='text-neutral-500  basis-full text-center'>Tu Cuenta</p>
+                </Option>
+              </div>
+              <div
+                onClick={() => {
+                  changeView('favorite');
+                  toggleModalActive();
+                }}
+              >
+                <Option>
+                  <AiOutlineHeart className='text-neutral-700 text-2xl' />
+                  <p className='text-neutral-500  basis-full text-center'>Favoritos</p>
+                </Option>
+              </div>
               <div onClick={closeUserSession}>
                 <Option>
                   <CiLogout className='text-neutral-700 text-2xl' />

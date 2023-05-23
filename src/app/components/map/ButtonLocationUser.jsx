@@ -14,7 +14,7 @@ export const ButtonLocationUser = () => {
   };
   return (
     <button
-      className='fixed right-[8px] bottom-[75px] z-10 bg-blue-500 py-2 px-3 rounded-md shadow hover:bg-blue-700 transition-colors'
+      className='fixed right-[8px] bottom-[75px] z-[2] bg-blue-500 py-2 px-3 rounded-md shadow hover:bg-blue-700 transition-colors'
       onClick={handleClick}
     >
       <BiCurrentLocation className='text-white' size={20} />
