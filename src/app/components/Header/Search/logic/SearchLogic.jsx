@@ -1,12 +1,16 @@
+/* eslint-disable camelcase */
 import { useSelector, useDispatch } from 'react-redux';
 import { setQuery, deleteOneSearchHistory } from '../../../../../store/search/searchSlice';
 import { getResults } from '../../../../../store/search/thunk';
 import { useToggle } from '../../../../../hooks/useToggle';
 import { useState, useRef } from 'react';
+import { useMapStore } from '../../../../hooks/useMapStore';
+import { setNearbyPlaces } from '../../../../../store/places/placesSlice';
 
 export const SearchLogic = () => {
   const { userLocation } = useSelector((state) => state.places);
   const { searchHistory, results, isLoading } = useSelector((state) => state.search);
+  const { map } = useMapStore();
   const [titleOption, setTitleOption] = useState('Todos');
   const [titleValue, setTitleValue] = useState('');
   const [queryValue, setQueryValue] = useState('');
@@ -14,6 +18,29 @@ export const SearchLogic = () => {
   const [isActiveInput, setIsActiveInput] = useState(false);
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+
+  // when the user click a search
+  const handleClick = (place) => {
+    const { location, name, wheelchair_accessible_entrance, place_id, types } = place;
+    dispatch(
+      setNearbyPlaces([
+        {
+          location,
+          name,
+          place_id,
+          types,
+          wheelchair_accessible_entrance,
+        },
+      ]),
+    );
+    const { lat, lng } = location;
+
+    const latLng = new window.google.maps.LatLng(lat, lng);
+
+    // Pan the map to the new marker's location
+    map.panTo(latLng);
+    map.setZoom(14);
+  };
 
   const handleFocus = () => {
     setIsActiveInput(true);
@@ -43,7 +70,6 @@ export const SearchLogic = () => {
     };
     if (!showResults) toggleShowResults();
     dispatch(getResults(newSearch));
-    console.log(results);
   };
 
   const changeTitleOption = (title, value) => {
@@ -67,5 +93,6 @@ export const SearchLogic = () => {
     handleFocus,
     handleBlur,
     deleteHistory,
+    handleClick,
   };
 };

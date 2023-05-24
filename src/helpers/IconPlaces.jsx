@@ -24,4 +24,4 @@ export const IconsPlaces = [
   'store',
   'supermarket',
   'zoo',
-]
+];
