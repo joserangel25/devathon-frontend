@@ -1,11 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const checkUser =
+  sessionStorage.getItem('user') !== null ? JSON.parse(sessionStorage.getItem('user')) : null;
+
 const base = {
-  user: null,
+  user: checkUser,
   isLoading: false,
   errors: null,
   isCreated: false,
+  isValid: false,
   isLogued: false,
+  favorites: [],
+  isModalActive: false,
+  view: 'edit', // edit , favorites
 };
 
 export const authSlice = createSlice({
@@ -14,6 +21,15 @@ export const authSlice = createSlice({
   reducers: {
     setIsLoading(state) {
       state.isLoading = !state.isLoading;
+    },
+    setIsValid(state) {
+      state.isValid = !state.isValid;
+    },
+    setIsModalActive(state) {
+      state.isModalActive = !state.isModalActive;
+    },
+    setView(state, { payload }) {
+      state.view = payload;
     },
     setIsCreated(state) {
       state.isCreated = !state.isCreated;
@@ -31,10 +47,20 @@ export const authSlice = createSlice({
       state.user = null;
       state.isLogued = false;
       state.errors = null;
+      sessionStorage.removeItem('user');
       sessionStorage.removeItem('jwt');
     },
   },
 });
 
-export const { setIsLoading, setUser, setErrors, setIsCreated, setLogued, setLogOut } =
-  authSlice.actions;
+export const {
+  setIsLoading,
+  setIsValid,
+  setUser,
+  setErrors,
+  setIsCreated,
+  setLogued,
+  setLogOut,
+  setIsModalActive,
+  setView,
+} = authSlice.actions;

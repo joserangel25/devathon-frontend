@@ -5,20 +5,16 @@ import { submitRegister } from '../../../store/auth/thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 export const RegisterLogic = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, isCreated } = useSelector((state) => state.auth);
 
   const userCreated = () => {
-    toast.success('Usuario Creado', { position: 'top-right', duration: 2000 });
-
-    // redirect the user after the user have created
-    setTimeout(() => {
-      navigate('/login');
-    }, 2500);
+    toast.success('Usuario Creado, revice su correo para activar su cuenta', {
+      position: 'top-right',
+      duration: 5000,
+    });
   };
 
   useEffect(() => {

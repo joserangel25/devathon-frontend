@@ -8,6 +8,7 @@ import { ButtonLocationUser } from '../components/map/ButtonLocationUser';
 import Feedback from '../components/Feedback';
 import { Header } from '../components/Header';
 import { Filter } from '../components/Filter';
+import { Edit } from '../components/Edit';
 import { ModalIntroduction } from '../components/ModalIntroduction';
 
 const Homepage = () => {
@@ -22,6 +23,7 @@ const Homepage = () => {
       <Filter />
       <MapView />
       {deniedLocation && <ErrorAccessLocation />}
+      <Edit />
       <ButtonLocationUser />
       {modalIntroduction && <ModalIntroduction toggleModalIntroduction={toggleModalIntroduction} />}
       <Feedback />
