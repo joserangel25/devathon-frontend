@@ -23,6 +23,7 @@ const Search = () => {
     handleFocus,
     handleBlur,
     deleteHistory,
+    handleClick,
   } = SearchLogic();
   return (
     <article className='w-full h-[40px] basis-[10%] lg:basis-full'>
@@ -71,11 +72,13 @@ const Search = () => {
               {results.length > 0 &&
                 results.map((result, index) => (
                   <div
-                    className='bg-white border-b-[1px] border-neutral-100 py-5 px-4 relative flex justify-between'
+                    onClick={() => handleClick(result)}
+                    className='bg-white border-b-[1px] border-neutral-100 py-5 px-4 relative flex justify-between cursor-pointer'
                     key={result.name + index}
                   >
                     <div className='basis-[14%] flex items-start pt-2 lg:basis-[8%]'>
                       <img
+                        className='max-w-[40px]'
                         src={
                           result.wheelchair_accessible_entrance
                             ? '/public/assets/icons/wheel-accesible.svg'

@@ -5,6 +5,7 @@ import { useActionsMap } from './useActionsMap';
 import { usePlacesStore } from './usePlacesStore';
 import { useMapStore } from './useMapStore';
 import { useActionsPlaces } from './useActionsPlaces';
+import { useSelector } from 'react-redux';
 
 const mapOptions = {
   controlSize: 40,
@@ -15,6 +16,11 @@ const mapOptions = {
   },
   zoomControl: false,
   scaleControl: true,
+  mapId: environment.MAP_ID,
+  // disabled all the buttons that comes by default
+  disableDefaultUI: false,
+  streetViewControl: false,
+  fullscreenControl: false,
 };
 
 const loader = new Loader({
@@ -23,6 +29,7 @@ const loader = new Loader({
 
 export const useMap = () => {
   const { userLocation, deniedLocation, nearbyPlaces } = usePlacesStore();
+  const { filter } = useSelector((state) => state.filter);
   const { map, isLoading } = useMapStore();
   const { doGetNearbyPlaces, doPrintNearbyPlaces } = useActionsPlaces();
   const { doSetMap } = useActionsMap();
@@ -78,6 +85,10 @@ export const useMap = () => {
       doPrintNearbyPlaces();
     }
   }, [nearbyPlaces, deniedLocation, map]);
+
+  useEffect(() => {
+    doPrintNearbyPlaces();
+  }, [filter]);
 
   return {
     refElement,
