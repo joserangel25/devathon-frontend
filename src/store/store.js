@@ -6,6 +6,7 @@ import { authSlice } from './auth/authSlice';
 import { searchSlice } from './search/searchSlice';
 import { filterSlice } from './filter/filterSlice';
 import { guideSlice } from './guide/guideSlice';
+import { detailSlice } from './detail/detailsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     auth: authSlice.reducer,
     search: searchSlice.reducer,
     filter: filterSlice.reducer,
-    guide:guideSlice.reducer
+    guide: guideSlice.reducer,
+    detail: detailSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

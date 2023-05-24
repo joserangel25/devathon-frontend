@@ -1,20 +1,24 @@
 /* eslint-disable camelcase */
 import { useDispatch, useSelector } from 'react-redux';
-import { setDeniedLocation, setUserLocation } from '../../store/places/placesSlice';
+import {
+  setDeniedLocation,
+  setUserLocation,
+  setCurrentLocation,
+} from '../../store/places/placesSlice';
+import { setIsDetailActive, setName } from '../../store/detail/detailsSlice';
 import { useGeolocation } from './useGeolocation';
 import { useEffect } from 'react';
 import { getNearbyPlaces } from '../../store/places/thunks';
-import { usePlacesStore } from './usePlacesStore';
-import { useMapStore } from './useMapStore';
 import { isThereIcon } from '../../helpers/filterByIcon';
-import { toast } from 'react-hot-toast';
+import { getDetail } from '../../store/detail/thunk';
 
-export const useActionsPlaces = () => {
+let oldMarkers = [];
+let circle = null;
+
+export const useActionsPlaces = (map, nearbyPlaces) => {
   const dispatch = useDispatch();
   const { filter } = useSelector((state) => state.filter);
   const { coordinatesUser, acceptedPermissions } = useGeolocation();
-  const { nearbyPlaces } = usePlacesStore();
-  const { map } = useMapStore();
 
   useEffect(() => {
     if (!acceptedPermissions) return doDeniedUserLocation();
@@ -25,15 +29,61 @@ export const useActionsPlaces = () => {
     dispatch(setUserLocation(coordsUser));
   };
 
+  const doSetCurrentLocation = (coords) => {
+    dispatch(setCurrentLocation(coords));
+  };
+
   const doDeniedUserLocation = () => {
     dispatch(setDeniedLocation());
   };
 
-  const doGetNearbyPlaces = () => {
-    dispatch(getNearbyPlaces());
+  const doGetNearbyPlaces = (coord) => {
+    dispatch(getNearbyPlaces(coord));
+  };
+
+  const createCircle = (coords) => {
+    if (circle) {
+      circle.setMap(null);
+      circle = null;
+    }
+
+    // Create a new circle with the user's location
+    circle = new window.google.maps.Circle({
+      map,
+      center: coords,
+      radius: 5000,
+      strokeColor: '#66BFFF',
+      strokeOpacity: 0.3,
+      strokeWeight: 2,
+      fillColor: '#CCEAFF',
+      fillOpacity: 0.2,
+    });
+  };
+
+  const setDetail = (name) => {
+    dispatch(setIsDetailActive());
+    dispatch(setName(name));
+  };
+
+  const getDetailPlace = (placeId) => {
+    dispatch(getDetail(placeId));
+  };
+
+  const setPostion = (coords) => {
+    createCircle(coords);
+    doSetCurrentLocation(coords);
+    doGetNearbyPlaces(coords);
+  };
+
+  const deleteOldValues = () => {
+    oldMarkers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    oldMarkers = [];
   };
 
   const doPrintNearbyPlaces = () => {
+    deleteOldValues();
     nearbyPlaces.forEach((place) => {
       const { location, name, wheelchair_accessible_entrance, place_id, types } = place;
       const { lat, lng } = location;
@@ -50,8 +100,8 @@ export const useActionsPlaces = () => {
 
       const urlImg = {
         url: urlPath(),
-        scaledSize: new window.google.maps.Size(40, 40),
-        labelOrigin: new window.google.maps.Point(90, 20),
+        scaledSize: new window.google.maps.Size(38, 38),
+        labelOrigin: new window.google.maps.Point(60, 20),
         anchor: new window.google.maps.Point(20, 20),
       };
 
@@ -62,26 +112,26 @@ export const useActionsPlaces = () => {
         map,
         name,
         icon: urlImg,
-        // label: { // this is the name the is teh next to the icon
+        // label: {
         //   text: name,
-        //   color:
-        //     filter && filter === 'accesible' && wheelchair_accessible_entrance
-        //       ? `#39AC73`
-        //       : filter && filter === 'no-accesible' && !wheelchair_accessible_entrance
-        //       ? `#F64C4C`
-        //       : `#0052CC`, // adjust the color of the label text
+        //   color: '#344051',
         // },
         place_id,
       });
+      oldMarkers.push(marker);
       marker.addListener('click', (event) => {
-        const clickedPlaceId = marker.place_id;
-        console.log(marker, clickedPlaceId);
-        toast(`${marker.name}`);
+        const placeId = marker.place_id; // place's place_id
+        const name = marker.name; // place's name
+        setDetail(name); // this show the modal
+        getDetailPlace(placeId); // this goes to look for the information place
       });
     });
   };
 
   return {
+    createCircle,
+    setPostion,
+    deleteOldValues,
     doGetNearbyPlaces,
     doPrintNearbyPlaces,
   };

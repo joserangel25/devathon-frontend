@@ -5,7 +5,7 @@ import { getResults } from '../../../../../store/search/thunk';
 import { useToggle } from '../../../../../hooks/useToggle';
 import { useState, useRef } from 'react';
 import { useMapStore } from '../../../../hooks/useMapStore';
-import { setNearbyPlaces } from '../../../../../store/places/placesSlice';
+import { setSearchNearPlaces } from '../../../../../store/places/placesSlice';
 
 export const SearchLogic = () => {
   const { userLocation } = useSelector((state) => state.places);
@@ -23,7 +23,7 @@ export const SearchLogic = () => {
   const handleClick = (place) => {
     const { location, name, wheelchair_accessible_entrance, place_id, types } = place;
     dispatch(
-      setNearbyPlaces([
+      setSearchNearPlaces([
         {
           location,
           name,
@@ -39,7 +39,7 @@ export const SearchLogic = () => {
 
     // Pan the map to the new marker's location
     map.panTo(latLng);
-    map.setZoom(14);
+    map.setZoom(15);
   };
 
   const handleFocus = () => {
