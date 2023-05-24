@@ -7,7 +7,7 @@ import { submitFeedback } from '../../../../../store/feedback/thunks';
 
 export const overallLogic = (changeView) => {
   const numbers = [...Array(11).keys()];
-  const { name, email } = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 
@@ -22,10 +22,10 @@ export const overallLogic = (changeView) => {
 
   // the data is already validate
   const onSubmit = (data) => {
-    if (name && email) {
+    if (user) {
       const feedbackEsp = {
-        email,
-        nombre: name,
+        email: user.email,
+        nombre: user.name,
         mensaje: data.msg,
         satisfacciónGeneral: data.overallSatisfaction,
         asunto: data.subject,

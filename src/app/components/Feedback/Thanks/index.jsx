@@ -8,7 +8,7 @@ export const FeedbackThanks = () => {
       </p>
       <p className='text-neutral-500 text-pt'>
         <strong>Agradecemos</strong> el tiempo y esfuerzo que tomaste para revisar nuestro trabajo y
-        <strong>compartir tus pensamientos</strong> con nosotros.
+        <strong> compartir tus pensamientos</strong> con nosotros.
       </p>
     </article>
   );

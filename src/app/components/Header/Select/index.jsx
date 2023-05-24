@@ -28,7 +28,10 @@ export const Select = ({ options, titleOption, changeTitleOption }) => {
             <div
               key={option.title}
               data-value={option.value}
-              onClick={() => changeTitleOption(option.title, option.value)}
+              onClick={() => {
+                changeTitleOption(option.title, option.value);
+                toggleShowOptions();
+              }}
             >
               <Option>
                 <span className='text-neutral-700 text-2xl'>{option.icon}</span>{' '}
