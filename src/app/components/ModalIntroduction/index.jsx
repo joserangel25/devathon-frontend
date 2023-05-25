@@ -1,9 +1,15 @@
 import { IoIosArrowForward } from 'react-icons/io';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { useToggle } from '../../../hooks/useToggle';
+import { setIsIntroductionActive } from '../../../store/guide/guideSlice';
+import { useDispatch } from 'react-redux';
 
-export const ModalIntroduction = ({ toggleModalIntroduction }) => {
+export const ModalIntroduction = () => {
   const [saveAnswer, toggleSaveAnswer] = useToggle(false);
+  const dispatch = useDispatch();
+  const toggleIsIntroductionActive = () => {
+    dispatch(setIsIntroductionActive());
+  };
   return (
     <section className='bg-black/40 fixed w-full h-full z-[10] left-0 top-0 backdrop-blur-sm flex items-center justify-center'>
       <article className='w-[90%] min-h-[41%] bg-white max-w-[740px] p-4 sm:p-8  modal__landscape'>
@@ -74,7 +80,7 @@ export const ModalIntroduction = ({ toggleModalIntroduction }) => {
                 if (saveAnswer) {
                   localStorage.setItem('saveAnswer', JSON.stringify(false));
                 }
-                toggleModalIntroduction();
+                toggleIsIntroductionActive();
               }}
             >
               Saltar tutorial

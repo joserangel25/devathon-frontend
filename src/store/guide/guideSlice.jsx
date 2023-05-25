@@ -6,17 +6,17 @@ const isSave =
     : true;
 
 const base = {
-  isActive: isSave,
+  isIntroductionActive: isSave,
 };
 
 export const guideSlice = createSlice({
   name: 'authSlice',
   initialState: base,
   reducers: {
-    setIsActive(state) {
-      state.isActive = !state.isActive;
+    setIsIntroductionActive(state) {
+      state.isIntroductionActive = !state.isIntroductionActive;
     },
   },
 });
 
-export const { setIsFirst, setIsActive } = guideSlice.actions;
+export const { setIsIntroductionActive } = guideSlice.actions;

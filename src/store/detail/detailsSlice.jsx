@@ -4,8 +4,8 @@ const base = {
   isDetailActive: false, // toggle the modal
   name: '', // place's name
   comments: [],
-  details: null,
-  isLoading: false,
+  place: null,
+  loading: false,
 };
 
 export const detailSlice = createSlice({
@@ -19,9 +19,12 @@ export const detailSlice = createSlice({
       state.name = payload;
     },
     setIsLoading(state) {
-      state.isLoading = !state.isLoading;
+      state.loading = !state.loading;
+    },
+    setPlace(state, { payload }) {
+      state.place = payload;
     },
   },
 });
 
-export const { setIsDetailActive, setName, setIsLoading } = detailSlice.actions;
+export const { setIsDetailActive, setName, setIsLoading, setPlace } = detailSlice.actions;
