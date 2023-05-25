@@ -9,7 +9,7 @@ import { Header } from '../components/Header';
 import { Filter } from '../components/Filter';
 import { Edit } from '../components/Edit';
 import { ModalIntroduction } from '../components/ModalIntroduction';
-import { Detail } from '../components/Detail';
+import DetailPlace from '../components/DetailPlace/DetailPlace';
 
 const Homepage = () => {
   const { deniedLocation } = usePlacesStore();
@@ -24,7 +24,7 @@ const Homepage = () => {
       <MapView />
       {deniedLocation && <ErrorAccessLocation />}
       <Edit />
-      <Detail />
+      <DetailPlace />
       {modalIntroduction && <ModalIntroduction toggleModalIntroduction={toggleModalIntroduction} />}
       <Feedback />
     </>
