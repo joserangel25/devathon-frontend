@@ -1,14 +1,15 @@
 import { toast } from 'react-hot-toast';
 import { setNearbyPlaces } from './placesSlice';
+import LugarAccesibleApi from '../../api/LugarAccesibleApi';
 
-export const getNearbyPlaces = () => {
+export const getNearbyPlaces = (location) => {
   return async (dispatch) => {
     try {
-      const resp = await fetch('/mock/placesMock.json');
-      const nearbyPlaces = await resp.json();
-      dispatch(setNearbyPlaces(nearbyPlaces.results));
+      const { data } = await LugarAccesibleApi.get(
+        `place/list?lat=${location.lat}&lng=${location.lng}`,
+      );
+      dispatch(setNearbyPlaces(data));
     } catch (error) {
-      console.log(error);
       toast.error(`ERROR al cargar los lugares cercanos`, {
         position: 'top-right',
       });
