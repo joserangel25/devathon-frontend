@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const base = {
   isDetailActive: false, // toggle the modal
   name: '', // place's name
+  placeId: '',
+  rating: 0,
   comments: [],
-  details: null,
-  isLoading: false,
+  place: null,
+  loading: false,
 };
 
 export const detailSlice = createSlice({
@@ -18,10 +20,30 @@ export const detailSlice = createSlice({
     setName(state, { payload }) {
       state.name = payload;
     },
+    setPlaceId(state, { payload }) {
+      state.placeId = payload;
+    },
     setIsLoading(state) {
-      state.isLoading = !state.isLoading;
+      state.loading = !state.loading;
+    },
+    setPlace(state, { payload }) {
+      state.place = payload;
+    },
+    setComments(state, { payload }) {
+      state.comments = payload;
+    },
+    setRating(state, { payload }) {
+      state.rating = payload;
     },
   },
 });
 
-export const { setIsDetailActive, setName, setIsLoading } = detailSlice.actions;
+export const {
+  setIsDetailActive,
+  setName,
+  setPlaceId,
+  setIsLoading,
+  setPlace,
+  setComments,
+  setRating,
+} = detailSlice.actions;

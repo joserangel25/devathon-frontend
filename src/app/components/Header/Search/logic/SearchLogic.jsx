@@ -8,7 +8,7 @@ import { useMapStore } from '../../../../hooks/useMapStore';
 import { setSearchNearPlaces } from '../../../../../store/places/placesSlice';
 
 export const SearchLogic = () => {
-  const { userLocation } = useSelector((state) => state.places);
+  const { currentLocation } = useSelector((state) => state.places);
   const { searchHistory, results, isLoading } = useSelector((state) => state.search);
   const { map } = useMapStore();
   const [titleOption, setTitleOption] = useState('Todos');
@@ -64,8 +64,8 @@ export const SearchLogic = () => {
     dispatch(setQuery(queryValue));
     const newSearch = {
       query: queryValue,
-      lat: userLocation.lat,
-      lng: userLocation.lng,
+      lat: currentLocation.lat,
+      lng: currentLocation.lng,
       types: titleValue,
     };
     if (!showResults) toggleShowResults();
