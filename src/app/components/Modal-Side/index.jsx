@@ -10,7 +10,7 @@ export const ModalSide = ({ title, toggleActive, children }) => {
         <h1 className='text-primary-900 font-bold text-[28px]'>{title}</h1>
         <AiOutlineCloseCircle
           data-testid='close'
-          className='text-3xl text-primary-900 cursor-pointer'
+          className='text-3xl text-primary-900 cursor-pointer min-w-[20px]'
           onClick={toggleActive}
         />
       </div>
