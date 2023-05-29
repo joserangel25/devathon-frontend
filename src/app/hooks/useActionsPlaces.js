@@ -94,7 +94,7 @@ export const useActionsPlaces = (map, nearbyPlaces) => {
         return filter && filter === 'accesible' && wheelchair_accessible_entrance
           ? `/assets/icons-map/icon-${urlIcon}-accesible.svg`
           : filter && filter === 'no-accesible' && !wheelchair_accessible_entrance
-          ? `/icons-map/icon-${urlIcon}-no.svg`
+          ? `/assets/icons-map/icon-${urlIcon}-no.svg`
           : `/assets/icons-map/icon-${urlIcon}.svg`;
       };
 

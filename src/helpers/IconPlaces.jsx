@@ -18,7 +18,7 @@ export const IconsPlaces = [
   'library',
   'park',
   'parking',
-  'policy',
+  'police',
   'restaurant',
   'school',
   'store',
